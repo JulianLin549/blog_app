@@ -1,14 +1,33 @@
-<%-include ("partials/header")  -%> <!-- updated syntax in ejs v3.0.1 -->
+<%-include ("partials/header") -%>
+<!-- updated syntax in ejs v3.0.1 -->
 
-<% blogs.forEach((blog) => {   %> 
-    <div>
-        <h2 ><%= blog.title %> </h2>
-        <img src="<%= blog.image  %> ">
-        <span><%= blog.created  %> </span>
-        <p><%= blog.body.substring(0,100) %>...</p> <!--only show the first 100 character  -->
-        <a href="/blogs/<%= blog._id %> ">Read More</a>
+<div class="ui main text container">
+    <div class="ui huge header">Blog App</div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% blogs.forEach((blog) => { %>
+            <div class="item">
+                <div class="image">
+                    <img src="<%= blog.image  %> " />
+                </div>
+                <div class="content">
+                    <a href="/blogs/<%= blog._id %>" class="header"><%= blog.title %></a>
+                    <div class="meta">
+                        <span><%= blog.created.toDateString() %> </span>
+                    </div>
+                    <div class="description">
+                        <p><%- blog.body.substring(0,100) %>...</p>
+                        <!--only show the first 100 character  -->
+                    </div>
+                    <div class="extea">
+                        <a href="/blogs/<%= blog._id %>" class="ui floated basic mini violet button">
+                            Read More
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
     </div>
-<% })  %> 
-
-
-<%-include ("partials/footer") -%> <!-- updated syntax in ejs v3.0.1 -->
+</div>
