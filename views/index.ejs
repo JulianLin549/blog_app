@@ -1,0 +1,14 @@
+<%-include ("partials/header")  -%> <!-- updated syntax in ejs v3.0.1 -->
+
+<% blogs.forEach((blog) => {   %> 
+    <div>
+        <h2 ><%= blog.title %> </h2>
+        <img src="<%= blog.image  %> ">
+        <span><%= blog.created  %> </span>
+        <p><%= blog.body.substring(0,100) %>...</p> <!--only show the first 100 character  -->
+        <a href="/blogs/<%= blog._id %> ">Read More</a>
+    </div>
+<% })  %> 
+
+
+<%-include ("partials/footer") -%> <!-- updated syntax in ejs v3.0.1 -->
