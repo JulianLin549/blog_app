@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const expressSanitizer = require('express-sanitizer')
-
 mongoose.connect("mongodb://localhost:27017/blog_app", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 //app config
 app.use(bodyParser.urlencoded({
@@ -21,17 +21,24 @@ app.set('view engine', 'ejs'); //ejs設訂為預設檔案。//create and update
 
 //mongoose/model config
 const blogSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
+
     image: {
         type: String,
         default: "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"
     },
-    body: String,
+    body: {
+        type: String,
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now
     }
-});
+})
 const Blog = mongoose.model("Blog", blogSchema);
 
 //restful route
